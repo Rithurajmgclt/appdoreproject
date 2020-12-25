@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/js/d3-mitch-tree.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/deltoss/d3-mitch-tree@1.0.2/dist/css/d3-mitch-tree-theme-default.min.css">
+    </head>
+    <body>
+        <section id="visualisation">
+        </section>
+
+        <script>
+    $.ajax({
+    type: "GET",
+    url:'http://127.0.0.1:8000/tree_view',
+    success: function( data) {
+        console.log(data)
+        var treePlugin = new d3.mitchTree.boxedTree()
+    .setData(data)
+    .setElement(document.getElementById("visualisation"))
+    .setIdAccessor(function(data) {
+        return data.id;
+    })
+    .setChildrenAccessor(function(data) {
+        return data.child;
+    })
+    .setBodyDisplayTextAccessor(function(data) {
+        return "Title= "+data.title+"/ points="+data.points;
+    })
+    .setTitleDisplayTextAccessor(function(data) {
+        return data.name;
+    })
+   
+    .initialize();
+    }
+});
+
+   
+        </script>
+    </body>
+</html>

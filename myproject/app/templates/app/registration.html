@@ -1,0 +1,54 @@
+{% load static %}
+<Html>  
+<head>  
+    <link rel='stylesheet' href="{% static 'app/style.css' %}"> 
+<title>  
+Registration Page  
+</title>  
+</head> 
+<body>
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+   
+<br>  
+<br>  
+<form action="{% url 'process' %}" method="POST">  
+    {% csrf_token %}
+  
+<label> Firstname </label>         
+<input type="text" name="firstname"> <br> <br>  
+<label> Lastname: </label>     
+<input type="text" name="lastname"> <br> <br>
+
+<label>   
+    title :  
+    </label> 
+   
+    <select name='title' required>   
+    <option></option>
+    {% for i in titles %} 
+    <option name={{i}}>{{i}}</option>
+    {% endfor %}
+    </select>  
+<label>   
+    parent :  
+    </label> 
+    <select name='select_parent'>      
+    <option></option>
+    {% for i in user %}  
+    <option value={{i.reg_id}}>{{i.first_name}} {{i.last_name}}</option>    
+    {% endfor %} 
+    </select>
+    <br> <br>  
+
+
+</select>
+<input type="submit" value="Submit"/>  
+</form>  
+</body>  
+</html> 
